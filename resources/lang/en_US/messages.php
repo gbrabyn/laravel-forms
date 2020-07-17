@@ -1,0 +1,50 @@
+<?php
+
+return [
+    'Add Programming Experience' => 'Add Programming Experience',
+    'Edit Programming Experience' => 'Edit Programming Experience',
+    'formAfterStartDate' => 'Must be after start date',
+    'fullName' => 'Full Name',
+    'email' => 'Email',
+    'address' => 'Address',
+    'country' => 'Country',
+    'programmingLanguages' => 'Programming Languages',
+    'additionalProgrammingLanguages' => 'Additional Languages',
+    'workExperience' => 'Work Experience',
+    'companyName' => 'Company Name',
+    'officeLocation' => 'Office Location',
+    'officeCountry' => 'Office Country',
+    'period' => 'Period',
+    'start' => 'Start',
+    'to' => 'to',
+    'finish' => 'Finish',
+    'type' => 'Type',
+    'programmingLanguagesUsed' => 'Languages Used',
+    'Programming Language' => 'Programming Language',
+    'Additional Programming Languages Used' => 'Additional Languages Used',
+    'Add' => 'Add',
+    'Remove' => 'Remove',
+    'Remove Job' => 'Remove Job',
+    'full time' => 'full time',
+    'part time' => 'part time',
+    'contract / temporary' => 'contract / temporary',
+    'Select country' => 'Select country...',
+    'addExperience' => 'Add Experience',
+    'formSave' => 'Save',
+    'Job' => 'Job',
+    'Select Programming Languages' => 'Choose Programming Languages Used',
+    'languagesRequired' => '"Programming Languages" or "Additional Languages" needs entries',
+    'languagesUsedRequired' => 'Languages (or Additional Languages) Used is Required',
+    'duplicateEntry' => 'Duplicate entry. See <a href="${url}" target="_blank">here</a>',
+    'confirmRemoveTag' => 'Confirm removal of: ${text}',
+    'confirmRemoveJob' => 'Confirm removal of Job',
+    
+    
+    
+    'formErrors' => 'Please fix the errors in the form below.',
+    'inputReCaptchaFail' => 'Failed to prove you are human',
+    'inputRequired' => 'Required',
+    'inputDuplicated' => 'Duplicated',
+    
+    
+];

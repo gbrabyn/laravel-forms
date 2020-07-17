@@ -1,0 +1,21 @@
+@import '../libs/vars';
+@import '../libs/functions';
+@import '../libs/mixins';
+@import '../libs/vendor';
+
+#experienceContainer {
+    >.experience {
+        padding-top: 2em;
+
+        &:not(:first-of-type) {
+            border-top: 2px solid _palette(accent);
+        }
+    }
+}
+#saveRow {
+    margin-top: 3em;
+
+}
+#switchLang {
+    text-align: right;
+}

@@ -1,0 +1,125 @@
+$alertColour: red;
+
+.taskLayout {
+    display:block;
+    position:relative;
+    clear:both;
+    max-width: 900px;
+}
+
+/* Style inputs, select elements and textareas */
+input, select, textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+input[type="date"],
+input[type="time"],
+input[type="file"],
+input[type="checkbox"],
+input[type="radio"] {
+    width: initial;
+}
+input[type="number"] {
+    text-align: right;
+    max-width: 150px;
+}
+/* Style the submit button */
+input[type="submit"],
+.submitBtn {
+    width: auto;
+    padding-left: 80px;
+    padding-right: 80px;
+    display:block;
+    margin:0 auto;
+    border-radius: 4px;
+    cursor: pointer;
+}
+textarea {
+    height: 200px;
+}
+
+input.error,
+select.error,
+textarea.error {
+    border-color: $alertColour;
+}
+div.error {
+    border: 1px solid $alertColour;
+}
+span.error,
+p.error,
+p.errors {
+    color: $alertColour;
+}
+span.msgRight {
+    margin-left: 5px;
+}
+
+/* Style the label to display next to the inputs */
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+/* Floating column for labels: 25% width */
+.label-col {
+    float: left;
+    width: 20%;
+    text-align:right;
+    margin-top: 6px;
+    color: _palette('accent');
+}
+
+/* Floating column for inputs: 75% width */
+.input-col {
+    float: left;
+    width: 80%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.table-cell {
+    display:table-cell;
+    padding-right:10px;
+}
+ul.checkboxList,
+ul.checkboxListHorizontal {
+    list-style-type: none;
+    margin:5px;
+    padding:0;
+    column-width: 180px;
+
+    li > label {
+        padding-right: 20px;
+
+        input {
+            margin-right:5px;
+        }
+    }
+}
+ul.checkboxListHorizontal {
+    li {
+        display: inline;
+    }
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+    .label-col, .input-col, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .label-col {
+        text-align: left;
+    }
+}

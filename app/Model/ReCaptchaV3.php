@@ -18,12 +18,10 @@ class ReCaptchaV3
      */
     private $secret;
 
-    /**
-     * @var bool
-     */
-    private $sendUsersIpAddress = false;
-    
-    
+    private $options = [
+        'sendUsersIpAddress' => false,
+    ];
+
     private $apiUrl = 'https://www.google.com/recaptcha/api/siteverify';
 
     
@@ -35,8 +33,10 @@ class ReCaptchaV3
 
     private function setOptions(array $options)
     {
-        if(\array_key_exists('sendUsersIpAddress', $options)){
-            $this->sendUsersIpAddress = (bool)$options['sendUsersIpAddress'];
+        foreach($options as $k => $v){
+            if(\array_key_exists($k, $this->options)){
+                $this->options[$k] = (bool)$v;
+            }
         }
     }
 
@@ -50,6 +50,7 @@ class ReCaptchaV3
         $response = $this->getApiResponse($this->value);
 
         if(! empty($response->{'error-codes'})){
+            // better to throw a custom exception
             throw new \Exception('Error encountered in API response: '.print_r($response->{'error-codes'}, true));
         }
         
@@ -65,7 +66,7 @@ class ReCaptchaV3
     {
         $data = ['secret'=>$this->secret, 'response'=>$responseFromForm];
 
-        if($this->sendUsersIpAddress === true){
+        if($this->options['sendUsersIpAddress'] === true){
             $data['remoteip'] = $this->getUserIpAddr();
         }
 

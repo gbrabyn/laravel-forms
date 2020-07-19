@@ -10,6 +10,9 @@ ul {
 }
 
 pre {
-    background-color: #f2ced0;
+    background-color: #f5f6f7;
     padding: 3px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-align: justify;
 }

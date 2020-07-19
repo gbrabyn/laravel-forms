@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ProgrammerExperienceController@index')->name('programmer.list');
+Route::view('/', 'tutorial.introduction')->name('tutorial.intro');
+Route::get('/list', 'ProgrammerExperienceController@index')->name('programmer.list');
 Route::view('/instructions', 'tutorial.instructions')->name('tutorial.instructions');
+Route::view('/techniques', 'tutorial.techniques')->name('tutorial.techniques');
 
 Route::group([
     'prefix' => '{locale}/programmer',

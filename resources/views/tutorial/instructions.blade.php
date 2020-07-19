@@ -19,7 +19,7 @@
     The source code for this website can be found at <a href="{{ $gitHubRepo }}">GitHub</a>.
 </p>
 <p>
-    Below are instruction on how to set up in Laravel <a href="/en_US/programmer/create">this dynamic form here</a>.
+    Below are instruction on how to set up in Laravel 7 <a href="/en_US/programmer/create">this dynamic form here</a>.
     The form contains several dynamic sections (fields added by JavaScript). It also has dynamic elements within
     other dynamic blocks. This makes building and validating the form more complex. Some quite complex validation
     rules are applied.
@@ -38,14 +38,14 @@
         <ul>
             <li>Composer install ("laravelcollective/html": "*")</li>
             <li>config/app.php - add Collective\Html\HtmlServiceProvider::class to 'providers' array</li>
-            <li>Create app/Model directory. Add FormFieldHelper.php</li>
+            <li>Create app/Model directory. Add <a href="{{ $gitHubRepo }}/blob/master/app/Model/FormFieldHelper.php">FormFieldHelper.php</a></li>
             <li>Create directory "resources/views/components/form" and add files:
                 <ul>
-                    <li>myCheckboxList.blade.php</li>
-                    <li>myInput.blade.php</li>
-                    <li>myRadioList.blade.php</li>
-                    <li>mySelect.blade.php</li>
-                    <li>myTextarea.blade.php</li>                    
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myCheckboxList.blade.php">myCheckboxList.blade.php</a></li>
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myInput.blade.php">myInput.blade.php</a></li>
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myRadioList.blade.php">myRadioList.blade.php</a></li>
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/mySelect.blade.php">mySelect.blade.php</a></li>
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myTextarea.blade.php">myTextarea.blade.php</a></li>                    
                 </ul>
                 Each of these files adds an error message alongside the form field and adds 
                 an "error" class (so it can be highlighted) to the form field if it has an error. myCheckboxList.blade.php
@@ -55,7 +55,7 @@
                 <br>
                 These files should be customized for your projects particular needs.
             </li>
-            <li>app/Providers - add FormServiceProvider.php</li>
+            <li>app/Providers - add <a href="{{ $gitHubRepo }}/blob/master/app/Providers/FormServiceProvider.php">FormServiceProvider.php</a></li>
             <li>config/app.php - add App\Providers\FormServiceProvider::class to 'providers' array</li>
         </ul>
     </li>
@@ -105,7 +105,41 @@ public function update()
 </pre> 
             </li>
             <li>
+                Add an "if" statement that lets users know if there are any errors in the form.
+<pre>
+&commat;if ($errors->any())
+    &lt;p class="errors">Please fix the errors in the form below.&lt;/p&gt;
+&commat;endif
+</pre>
+            </li>
+            <li>
                 Add the fields "Full Name", "Email" and "Address".
+<pre>
+&lt;div class="row"&gt;
+    &lt;div class="label-col"&gt;
+        &lt;label for="fullName"&gt;Full Name&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="input-col"&gt;
+        &lbrace;!! Form::myInput('text', 'fullName', null, ['id'=>'fullName']) !!&rbrace; 
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="label-col"&gt;
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="input-col"&gt;
+        &lbrace;!! Form::myInput('email', 'email', null, ['id'=>'email']) !!&rbrace; 
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="label-col"&gt;
+        &lt;label for="address"&gt;Address&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="input-col"&gt;
+        &lbrace;&lbrace; Form::myTextarea('address', null, ['id'=>'address']) &rbrace; &rbrace; 
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
             </li>
         </ul>
     </li>
@@ -113,7 +147,7 @@ public function update()
         Make form Multi-lingual
         <ul>
             <li>
-                app/Http/Middleware add SetLocale.php
+                app/Http/Middleware add <a href="{{ $gitHubRepo }}/blob/master/app/Http/Middleware/SetLocale.php">SetLocale.php</a>
             </li>
             <li>
                 app/Http/kernel.php add line "'setlocale' => \App\Http\Middleware\SetLocale::class" to $routeMiddleware array
@@ -121,6 +155,8 @@ public function update()
             <li>
                 For your add, store, edit, update routes add '{locale}/' to the base of the 
                 route path and add "'middleware' => 'setlocale'" to the route. Adjust all links (& form action) to the routes.
+                <br>
+                Example:
 <pre>
 Route::group([
     'prefix' => '{locale}/programmer',
@@ -141,19 +177,41 @@ Route::group([
                 directories for whichever languages you want to use. 
             </li>
             <li>
-                In resources/lang/en_US add the messages.php file (validation.php should already exist). 
-                In resources/lang/de_DE add the messages.php and validation.php files.
+                In resources/lang/en_US add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/en_US/messages.php">messages.php</a> file 
+                (validation.php should already exist). 
+                In resources/lang/de_DE add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/de_DE/messages.php">messages.php</a> 
+                and <a href="{{ $gitHubRepo }}/blob/master/resources/lang/de_DE/validation.php">validation.php</a>  files.
             </li>
             <li>
-                Implement the translator for existing form labels and submit button.<br>
-                &commat;lang('messages.fullName'), &commat;lang('messages.email'), 
-                &commat;lang('messages.address') &amp; &commat;lang('messages.formSave')
+                Implement the translator for existing form labels, form error message and submit button.<br>
+                &commat;lang('messages.fullName'), &commat;lang('messages.email'), &commat;lang('messages.address'), 
+                &commat;lang('messages.formErrors') &amp; &commat;lang('messages.formSave')
             </li>
             <li>
                 Create language switch links:
                 <ul>
                     <li>
                         Create file app/helpers.php. Add function languageSwitch().
+<pre>
+function languageSwitch()
+{
+    $route = request()->route();
+    $currentLocale = $route->parameter('locale', 'en_US');
+
+    if($currentLocale=='en_US'){
+        $newLocale = 'de_DE';
+        $text = 'Deutsch (German)';
+    }else{
+        $newLocale = 'en_US';
+        $text = 'English';
+    }
+
+    $route->setParameter('locale', $newLocale);
+    $url = route($route->getName(), $route->parameters);
+
+    return '&lt;a href="'.$url.'"&gt;'.$text.'&lt;/a&gt;';
+}
+</pre>
                     </li>
                     <li>
                         In composer.json autoload section add:
@@ -178,15 +236,16 @@ Blade::directive('languageSwitch', function () {
         </ul>
     </li>
     <li>
-        Make options Countries, Programming Languages and Work Types available to the form
+        Make Countries (used as &lt;select> options), Programming Languages (used as checkbox options) 
+        and Work Types (radio button options) available to the form
         <ul>
             <li>
                 Create Repository classes for Countries and Programming languages.<br>
-                \App\Repository\CountriesRepository<br>
-                \App\Repository\ProgrammingLanguagesRepository
+                <a href="{{ $gitHubRepo }}/blob/master/app/Repository/CountriesRepository.php">\App\Repository\CountriesRepository</a><br>
+                <a href="{{ $gitHubRepo }}/blob/master/app/Repository/ProgrammingLanguagesRepository.php">\App\Repository\ProgrammingLanguagesRepository</a><br>
             </li>
             <li>
-                Create \App\Model\ProgrammingExperienceFormOptions class
+                Create <a href="{{ $gitHubRepo }}/blob/master/app/Model/ProgrammingExperienceFormOptions.php">\App\Model\ProgrammingExperienceFormOptions</a> class
             </li>
             <li>
                 Inject \App\Model\ProgrammingExperienceFormOptions as a dependency into the controller add()
@@ -207,6 +266,24 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
     </li>
     <li>
         Add to edit.blade.php fields Country and Programming Languages
+<pre>
+&lt;div class="row"&gt;
+    &lt;div class="label-col"&gt;
+        &lt;label for="countryId"&gt;&commat;lang('messages.country')&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="input-col"&gt;
+        &lbrace;&lbrace; Form::mySelect('countryId', $countries, null, ['id'=>'countryId', 'placeholder'=>trans('messages.Select country')]) &rbrace;&rbrace;              
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="label-col"&gt;
+        &commat;lang('messages.programmingLanguages')
+    &lt;/div&gt;
+    &lt;div class="input-col"&gt;
+        &lbrace;!! Form::myCheckboxList('languages', $languages, ['class'=>'checkboxList', 'style'=>'column-count:3;']) !!&rbrace; 
+    &lt;/div&gt;
+&lt;/div>
+</pre>
     </li>
     <li>
         Build the dynamic "Additional Languages" section
@@ -235,6 +312,39 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
                 Add to app/helpers.php the line:<br>
                 use Illuminate\Database\Eloquent;<br>
                 and functions attributeTemplate() and formIterator()
+<pre>
+function attributeTemplate($view, $attributes=[])
+{
+    $t =  view()->make($view, $attributes);
+    $esc = new \Laminas\Escaper\Escaper('utf-8');
+
+    return $esc->escapeHtmlAttr($t);
+}
+
+/**
+ * Used on a laravelcollective/html form to iterate through an array of fields
+ * 
+ * @param string $field
+ * @param \Illuminate\Database\Eloquent\Model|null $model
+ * @return array
+ */
+function formIterator(?Eloquent\Model $model, string $field) : array
+{
+    if(Form::oldInputIsEmpty() === false){
+        return array_keys(old($field,[]));
+    }
+    
+    if($model === null){
+        return [];
+    }
+    
+    $array = method_exists($model, 'getFormValue') 
+            ? $model->getFormValue($field) 
+            : data_get($model, $field);
+    
+    return is_array($array) ? array_keys($array) : [];
+}
+</pre>
             </li>
             <li>
                 In App\Providers\AppServiceProvider boot() method add:
@@ -244,7 +354,7 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
             </li>
             <li>
                 Create a partial view blade file for the items that will be added to "Additional Languages".<br>
-                Example: resources/views/programmer/_list-row.blade.php<br>
+                Example: <a href="{{ $gitHubRepo }}/blob/master/resources/views/programmer/_list-row.blade.php">resources/views/programmer/_list-row.blade.php</a><br>
                 Note:
                 <ul>
                     <li>
@@ -262,6 +372,35 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
             </li>
             <li>
                 Add "Additional Languages" to edit.blade.php<br>
+<pre>
+&lt;div class="row">
+    &lt;div class="label-col">
+        &commat;lang('messages.additionalProgrammingLanguages')
+    &lt;/div>
+    &lt;div class="input-col">
+        &commat;error('additionalLanguages')
+        &lt;span class="error msgAbove">&lbrace;&lbrace; $message &rbrace;&rbrace;&lt;/span>&lt;br>
+        &commat;enderror
+        &lt;table
+            id="additionalLanguages"
+            data-template="&lbrace;!! attributeTemplate('programmer._list-row', ['name'=>'additionalLanguages.__index__', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')]) !!&rbrace;"
+        >
+            &lt;tbody>
+            &commat;foreach(formIterator(($personExperience ?? null), 'additionalLanguages') as $key)
+                &commat;include('programmer._list-row', ['name'=>'additionalLanguages['.$key.']', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')])                        
+            &commat;endforeach
+            &lt;/tbody>
+            &lt;tfoot>
+                &lt;tr>
+                    &lt;td colspan="3" align="right">
+                        &lt;button type="button" id="additionalLanguageBtn" class="newTag">&commat;lang('messages.Add')&lt;/button>
+                    &lt;/td>
+                &lt;/tr>
+            &lt;/tfoot>
+        &lt;/table>
+    &lt;/div>
+&lt;/div>
+</pre>
                 NOTE:
                 <uL>
                     <li>
@@ -274,12 +413,16 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
                         Any existing "Additional Languages" are iterated through with help from the formIterator() function. 
                         If the form has been submitted then it iterates through the submitted values (from old() or session)
                         otherwise if an Eloquent\Model is present then it iterates through values from it. The last option 
-                        is to iterate through an empty array.
+                        is to iterate through an empty array.<br>
+                        The argument "($personExperience ?? null)" is there because the Eloquent\Model $personExperience
+                        will exist when the form is being used to edit an existing person entry but not when a new 
+                        person entry is being first created.
                     </li>
                 </ul>
             </li>
             <li>
-                Create the JavaScript (resources/js/programmer/edit.js) for the edit.blade.php and link to it.
+                Create the JavaScript (<a href="{{ $gitHubRepo }}/blob/master/resources/js/programmer/edit.js">resources/js/programmer/edit.js</a>) 
+                for the edit.blade.php and link to it.
             </li>
         </ul>
     </li>
@@ -288,7 +431,7 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
         <ul>
             <li>
                 Create the partial view blade template used to input each IT job (experience) the programmer has had
-                (i.e. resources/views/programmer/_experience.blade.php).
+                (i.e. <a href="{{ $gitHubRepo }}/blob/master/resources/views/programmer/_experience.blade.php">resources/views/programmer/_experience.blade.php</a>).
                 <br> 
                 Each job will become part of the experience[] array. Each job in the array will be given a unique integer key.
                 Example: experience[0] will be an array containing data on the first job 
@@ -297,10 +440,21 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
             </li>
             <li>
                 Add the "Work Experience" section to edit.blade.php. 
+<pre>
+&lt;div class="row">
+    &lt;h3>&commat;lang('messages.workExperience')&lt;/h3>
+&lt;/div>
+&commat;foreach (formIterator(($personExperience ?? null), 'experience') as $key)
+    &commat;include('programmer._experience', ['k'=>$key, 'countries'=>$countries, 'languages'=>$languages, 'workTypes'=>$workTypes])
+&commat;endforeach
+</pre>
                 <ul>
                     <li>
                         The function formIterator() is used while iterating through 
-                        the entered work experience and adding the _experience.blade.php for each job.
+                        the entered work experience and adding the _experience.blade.php for each job.<br>
+                        $personExperience is a \Illuminate\Database\Eloquent\Model and will not exist in the 
+                        add/create form but will be there for the edit form, hence the "($personExperience ?? null)". 
+                        $personExperience will be used to iterate through values from the database.
                     </li>
                     <li>
                         _experience.blade.php needs to be assigned variables: 'k' is a unique integer key for each experience;
@@ -326,6 +480,40 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
             </li>
             <li>
                 Add to /app/helpers.php the function nextKey().
+<pre>
+/**
+ * Used on a laravelcollective/html form to provide JavaScript with next key to use when adding to array of fields
+ * 
+ * @param \Illuminate\Database\Eloquent\Model|null $model
+ * @param string $parentField
+ * @return int
+ */
+function nextKey(?Eloquent\Model $model, string $parentField) : int
+{
+    if(Form::oldInputIsEmpty() && $model===null){
+        return 0;
+    }
+    
+    if(Form::oldInputIsEmpty()===false){
+        $parentValue = old($parentField);
+    }elseif(method_exists($model, 'getFormValue')){
+        $parentValue = $model->getFormValue($parentField);
+    }else{
+        $parentValue = data_get($model, $parentField);
+    }
+
+    if($parentValue === null || is_array($parentValue) === false){
+        return 0;
+    }
+
+    /* all array keys that are positive integers */
+    $intKeys = array_map('intval', array_filter(array_keys($parentValue), function($key){
+        return filter_var($key, FILTER_VALIDATE_INT)!==false && abs($key)==$key;
+    }));
+
+    return count($intKeys) ? (max($intKeys) + 1) : 0;
+}
+</pre>
             </li>
             <li>
                 In app/Providers/AppServiceProvider boot() method add:
@@ -382,14 +570,15 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
         I have moved it into the Repository directory.
     </li>
     <li>
-        Create the class App\Model\ReCaptchaV3.
+        Create the class <a href="{{ $gitHubRepo }}/blob/master/app/Model/ReCaptchaV3.php">App\Model\ReCaptchaV3</a>.
     </li>
     <li>
         Run command "php artisan make:request ProgrammingExperienceSave" to create the file
         /app/Http/Requests/ProgrammingExperienceSave.php with a skeleton ProgrammingExperienceSave
         class in it. This class will contain the form validation logic.
         <br><br>
-        Add the contents from the <a href="{{ $gitHubRepo }}" target="_blank">GitHub Repository</a>
+        Add the contents from the 
+        <a href="{{ $gitHubRepo }}/blob/master/app/Http/Requests/ProgrammingExperienceSave.php" target="_blank">GitHub Repository</a>
         to this file. The code here is quite self-explanatory if you are already familiar with writing
         <a href="https://laravel.com/docs/7.x/validation" target="_blank">Laravel Validation logic</a>.
     </li>
@@ -469,7 +658,7 @@ public function update(ProgrammingExperienceSave $request)
 <pre>
 &commat;if(!empty($personExperience))
 &lbrace;!! Form::model($personExperience, [
-                'route'=>['programmer.update', 'id'=>$personExperience->id, app()->getLocale()], 
+                'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()], 
                 'method'=>'put', 
                 'id'=>"experience"
     ]) 

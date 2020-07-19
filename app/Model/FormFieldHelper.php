@@ -30,6 +30,9 @@ class FormFieldHelper
         $this->errorName = $this->makeErrorName($fieldName);
     }
     
+    /** Field name used to retrieve errors uses dot syntax to denote arrays, 
+     * i.e. person.name for person[name]  
+     */
     private function makeErrorName(string $fieldName) : string
     {
         return \str_replace(['[', '"', '\'', ']'], ['.'], $fieldName);

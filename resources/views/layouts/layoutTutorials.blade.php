@@ -21,7 +21,7 @@
 
             <!-- Header -->
             <header id="header">
-                <a href="{{ route('tutorial.instructions') }}" class="logo"><strong>Dynamic Forms with Laravel</strong></a>
+                <a href="{{ route('tutorial.intro') }}" class="logo"><strong>Dynamic Forms with Laravel</strong></a>
                 <ul class="icons">
                     <li>"How to" Guide</li>
                 </ul>
@@ -45,28 +45,15 @@
                     <h2>Menu</h2>
                 </header>
                 <ul>
+                    <li><a href="{{ route('tutorial.intro') }}" accesskey="i">Introduction</a></li>
+                    <li><a href="{{ route('programmer.create', ['locale'=>'en_US']) }}" accesskey="l">Laravel Collective Example</a></li>
+                    <li><a href="{{ route('tutorial.techniques') }}" accesskey="e">General Techniques Used</a></li>
                     <li><a href="{{ route('tutorial.instructions') }}" accesskey="o">Instructions</a></li>
                     <li><a href="{{ route('programmer.list') }}" accesskey="e">Experience List</a></li>
-                    <li><a href="{{ route('programmer.create', ['locale'=>'en_US']) }}" accesskey="l">Laravel Collective Example</a></li>
                 </ul>
             </nav>
-
-            <!-- Section -->
-
-
-            <!-- Section -->
-            <section>
-
-            </section>
-
-            <!-- Footer -->
-            <footer id="footer">
-
-            </footer>
-
         </div>
     </div>
-
 </div>
 
 <!-- Scripts -->

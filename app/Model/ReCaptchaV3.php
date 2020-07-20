@@ -49,9 +49,8 @@ class ReCaptchaV3
     {
         $response = $this->getApiResponse($this->value);
 
-        if(! empty($response->{'error-codes'})){
-            // better to throw a custom exception
-            throw new \Exception('Error encountered in API response: '.print_r($response->{'error-codes'}, true));
+        if(!empty($response->{'error-codes'})){
+            \error_log('reCaptcha API error: '.print_r($response->{'error-codes'}, true));
         }
         
         return ($response->success == true);

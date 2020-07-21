@@ -1,4 +1,4 @@
-#How to Build Dynamic Forms in Laravel
+##How to Build Dynamic Forms in Laravel
 Tutorial teaching how to build complex dynamic forms the simple way. Dynamic forms are where JavaScript
 is used to add and remove blocks of form elements.
 

@@ -6,7 +6,8 @@ is used to add and remove blocks of form elements.
 
 The tutorial starts with an example form which you can use, submit and explore to your liking. It gives a 
 general overview of the principles used in building the form then goes on to give detailed instructions.
-Instructions include details of applying complex validation rules to dynamic elements of the form.
+Instructions include making the form multi-lingual, using reCAPTCHA and details of applying complex validation rules to 
+dynamic elements of the form.
 
 You can view the live website showing the tutorial at 
 [laravel-forms.brabyn.info](https://laravel-forms.brabyn.info/) or install on 

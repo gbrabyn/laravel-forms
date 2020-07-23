@@ -46,10 +46,10 @@
                 </header>
                 <ul>
                     <li><a href="{{ route('tutorial.intro') }}" accesskey="i">Introduction</a></li>
-                    <li><a href="{{ route('programmer.create', ['locale'=>'en_US']) }}" accesskey="l">Laravel Collective Example</a></li>
+                    <li><a href="{{ route('programmer.create', ['locale'=>'en_US']) }}" accesskey="l">Example Form</a></li>
                     <li><a href="{{ route('tutorial.techniques') }}" accesskey="e">General Techniques Used</a></li>
                     <li><a href="{{ route('tutorial.instructions') }}" accesskey="o">Instructions</a></li>
-                    <li><a href="{{ route('programmer.list') }}" accesskey="e">Experience List</a></li>
+                    <li><a href="{{ route('programmer.list') }}" accesskey="e">Form Entries</a></li>
                 </ul>
             </nav>
         </div>

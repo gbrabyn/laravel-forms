@@ -22,9 +22,7 @@
 @endpush
 
 @section('content')
-    <div id="switchLang">
-        @languageSwitch()
-    </div>
+
     <header class="main">
         <h1>Laravel Collective Forms Example: @lang('messages.Add Programming Experience')</h1>
         <h2>I.T. Recruitment Agency - Candidate Experience Form</h2>
@@ -34,8 +32,11 @@
     </p>
     <p>
         Feel free to use the form and test it. Your saved data will be removed after your session has expired.
-        Switch languages used in the form using the link to the above right.
+        Switch languages used in the form using the link below on the right.
     </p>
+    <div id="switchLang">
+        @languageSwitch()
+    </div>
     @if(!empty($personExperience))
     {!! Form::model($personExperience, [
                     'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()], 

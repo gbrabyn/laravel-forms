@@ -41,7 +41,7 @@
         <div class="label-col">
             @lang('messages.period')
         </div>
-        <div class="input-col">
+        <div class="input-col dateRange">
             <div class="table-cell">
                 {!! Form::myInput('date', 'experience['.$k.'][startDate]', null, ['placeholder'=>trans('messages.start')]) !!}
             </div>

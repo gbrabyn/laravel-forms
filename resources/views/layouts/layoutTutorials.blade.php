@@ -6,8 +6,12 @@
     </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="@yield('metaDescription')">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" href="{{ mix('/build/main.css') }}">
     @stack('css')
+    <script src="{{ mix('/build/main.js') }}" defer></script>
     @stack('scripts')
 </head>
 <body class="is-preload">
@@ -55,9 +59,5 @@
         </div>
     </div>
 </div>
-
-<!-- Scripts -->
-<script src="{{ mix('/build/main.js') }}"></script>
-
 </body>
 </html>

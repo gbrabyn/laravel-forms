@@ -5,8 +5,9 @@
 @extends('layouts.layoutTutorials')
 
 @section('headTitle')
-    Laravel - how to build dynamic forms
+    Laravel - how to build dynamic forms tutorial
 @endsection
+@section('metaDescription')Get base understanding of building and validating (server-side) forms where JS is used to add and remove fields. Have dynamic elements on top of dynamic elements and more. @endsection
 
 @section('content')
 <header class="main">

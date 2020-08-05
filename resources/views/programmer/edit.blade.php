@@ -7,9 +7,10 @@
 @section('headTitle')
     Laravel Collective Dynamic Forms Example
 @endsection
+@section('metaDescription')Demonstration form used in tutorial for building dynamic forms with Laravel. Add and remove fields and sections to forms using JS, even on top of already dynamically added sections. @endsection
 
 @push('scripts')
-<script src="{{ mix('/build/programmer/edit.js') }}"></script>
+<script src="{{ mix('/build/programmer/edit.js') }}" defer></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     function onSubmit(token) {

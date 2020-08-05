@@ -5,8 +5,9 @@
 @extends('layouts.layoutTutorials')
 
 @section('headTitle')
-    Techniques for building Dynamic Forms.
+    Techniques for building Dynamic Forms in Laravel.
 @endsection
+@section('metaDescription')General techniques used that allow adding and removing fields in forms (including in existing dynamically added sections) using JavaScript and PHP. @endsection
 @push('css')
     <link rel="stylesheet" href="{{ mix('/build/tutorial.css') }}">
 @endpush

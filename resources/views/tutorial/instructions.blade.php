@@ -7,6 +7,7 @@
 @section('headTitle')
     Laravel Collective - Dynamic Forms Tutorial
 @endsection
+@section('metaDescription')Detailed instructions on building a dynamic form in Laravel. Forms where JS add and remove elements. Simple techniques without using React, Vue or Angular. @endsection
 @push('css')
     <link rel="stylesheet" href="{{ mix('/build/tutorial.css') }}">
 @endpush

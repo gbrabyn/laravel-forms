@@ -13,3 +13,4 @@ npm-debug.log
 yarn-error.log
 /public/info.php
 /public/googlef006135870f7b2b7.html
+tests/CodeCoverage

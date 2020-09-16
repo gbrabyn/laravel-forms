@@ -26,7 +26,7 @@
     rules are applied.
 </p>
 <p>
-    To follow the instructions below you also need to use the 
+    To follow the instructions below you also need to use the
     <a href="{{ $gitHubRepo }}" target="_blank">GitHub repository</a>
     as they frequently require you to copy files or blocks of code from it.
 </p>
@@ -46,9 +46,9 @@
                     <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myInput.blade.php">myInput.blade.php</a></li>
                     <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myRadioList.blade.php">myRadioList.blade.php</a></li>
                     <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/mySelect.blade.php">mySelect.blade.php</a></li>
-                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myTextarea.blade.php">myTextarea.blade.php</a></li>                    
+                    <li><a href="{{ $gitHubRepo }}/blob/master/resources/views/components/form/myTextarea.blade.php">myTextarea.blade.php</a></li>
                 </ul>
-                Each of these files adds an error message alongside the form field and adds 
+                Each of these files adds an error message alongside the form field and adds
                 an "error" class (so it can be highlighted) to the form field if it has an error. myCheckboxList.blade.php
                 and myRadioList.blade.php create a &lt;ul> list of related radio or checkboxes.
                 <br>
@@ -89,21 +89,21 @@ public function update()
 </pre>
             </li>
             <li>
-                In routes/web.php create routes to each of the above actions. add() and edit() should be reached 
+                In routes/web.php create routes to each of the above actions. add() and edit() should be reached
                 by GET requests method, store() by POST request and update() by Laravels PUT method.
             </li>
             <li>
                 Create the view file "edit.blade.php" which will be shared by the add and edit pages.
             </li>
             <li>
-                Start the form on edit.blade.php. Use Laravel Collectives Form object to create the 
-                form opening and closing tags. The form should use method "post" in this case and should 
+                Start the form on edit.blade.php. Use Laravel Collectives Form object to create the
+                form opening and closing tags. The form should use method "post" in this case and should
                 post to the store() action.
-<pre>                
+<pre>
 &lbrace;!! Form::open(['route'=>['programmer.store'], 'method'=>'post', 'id'=>"experience"]) !!&rbrace;
 
 &lbrace;!! Form::close() !!&rbrace;
-</pre> 
+</pre>
             </li>
             <li>
                 Add an "if" statement that lets users know if there are any errors in the form.
@@ -121,7 +121,7 @@ public function update()
         &lt;label for="fullName"&gt;Full Name&lt;/label&gt;
     &lt;/div&gt;
     &lt;div class="input-col"&gt;
-        &lbrace;!! Form::myInput('text', 'fullName', null, ['id'=>'fullName']) !!&rbrace; 
+        &lbrace;!! Form::myInput('text', 'fullName', null, ['id'=>'fullName']) !!&rbrace;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
@@ -129,7 +129,7 @@ public function update()
         &lt;label for="email"&gt;Email&lt;/label&gt;
     &lt;/div&gt;
     &lt;div class="input-col"&gt;
-        &lbrace;!! Form::myInput('email', 'email', null, ['id'=>'email']) !!&rbrace; 
+        &lbrace;!! Form::myInput('email', 'email', null, ['id'=>'email']) !!&rbrace;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
@@ -137,7 +137,7 @@ public function update()
         &lt;label for="address"&gt;Address&lt;/label&gt;
     &lt;/div&gt;
     &lt;div class="input-col"&gt;
-        &lbrace;&lbrace; Form::myTextarea('address', null, ['id'=>'address']) &rbrace; &rbrace; 
+        &lbrace;&lbrace; Form::myTextarea('address', null, ['id'=>'address']) &rbrace; &rbrace;
     &lt;/div&gt;
 &lt;/div&gt;
 </pre>
@@ -154,7 +154,7 @@ public function update()
                 app/Http/kernel.php add line "'setlocale' => \App\Http\Middleware\SetLocale::class" to $routeMiddleware array
             </li>
             <li>
-                For your add, store, edit, update routes add '{locale}/' to the base of the 
+                For your add, store, edit, update routes add '{locale}/' to the base of the
                 route path and add "'middleware' => 'setlocale'" to the route. Adjust all links (& form action) to the routes.
                 <br>
                 Example:
@@ -165,7 +165,7 @@ Route::group([
     'where' => ['locale' => '^(en_US|de_DE)$'],
     'middleware' => 'setlocale'
     ], function() {
-    
+
         Route::get('/create', 'ProgrammerExperienceController@add')->name('programmer.create');
         Route::get('/{id}/edit', 'ProgrammerExperienceController@edit')->where(['id'=>'[0-9]+'])->name('programmer.edit');
         Route::post('/', 'ProgrammerExperienceController@store')->name('programmer.store');
@@ -174,18 +174,18 @@ Route::group([
 </pre>
             </li>
             <li>
-                Rename directory resources/lang/en to resources/lang/en_US. Create directory resources/lang/de_DE or 
-                directories for whichever languages you want to use. 
+                Rename directory resources/lang/en to resources/lang/en_US. Create directory resources/lang/de_DE or
+                directories for whichever languages you want to use.
             </li>
             <li>
-                In resources/lang/en_US add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/en_US/messages.php">messages.php</a> file 
-                (validation.php should already exist). 
-                In resources/lang/de_DE add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/de_DE/messages.php">messages.php</a> 
+                In resources/lang/en_US add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/en_US/messages.php">messages.php</a> file
+                (validation.php should already exist).
+                In resources/lang/de_DE add the <a href="{{ $gitHubRepo }}/blob/master/resources/lang/de_DE/messages.php">messages.php</a>
                 and <a href="{{ $gitHubRepo }}/blob/master/resources/lang/de_DE/validation.php">validation.php</a>  files.
             </li>
             <li>
                 Implement the translator for existing form labels, form error message and submit button.<br>
-                &commat;lang('messages.fullName'), &commat;lang('messages.email'), &commat;lang('messages.address'), 
+                &commat;lang('messages.fullName'), &commat;lang('messages.email'), &commat;lang('messages.address'),
                 &commat;lang('messages.formErrors') &amp; &commat;lang('messages.formSave')
             </li>
             <li>
@@ -231,13 +231,13 @@ Blade::directive('languageSwitch', function () {
                     </li>
                     <li>
                         In edit.blade.php create a language switch button by adding "&commat;languageSwitch()"
-                    </li>                    
+                    </li>
                 </ul>
             </li>
         </ul>
     </li>
     <li>
-        Make Countries (used as &lt;select> options), Programming Languages (used as checkbox options) 
+        Make Countries (used as &lt;select> options), Programming Languages (used as checkbox options)
         and Work Types (radio button options) available to the form
         <ul>
             <li>
@@ -250,7 +250,7 @@ Blade::directive('languageSwitch', function () {
             </li>
             <li>
                 Inject \App\Model\ProgrammingExperienceFormOptions as a dependency into the controller add()
-                method and use this object to send "countries", "languages" and "workTypes" to the view. Used as 
+                method and use this object to send "countries", "languages" and "workTypes" to the view. Used as
                 options in the form.
 <pre>
 public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
@@ -273,7 +273,7 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
         &lt;label for="countryId"&gt;&commat;lang('messages.country')&lt;/label&gt;
     &lt;/div&gt;
     &lt;div class="input-col"&gt;
-        &lbrace;&lbrace; Form::mySelect('countryId', $countries, null, ['id'=>'countryId', 'placeholder'=>trans('messages.Select country')]) &rbrace;&rbrace;              
+        &lbrace;&lbrace; Form::mySelect('countryId', $countries, null, ['id'=>'countryId', 'placeholder'=>trans('messages.Select country')]) &rbrace;&rbrace;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
@@ -281,7 +281,7 @@ public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
         &commat;lang('messages.programmingLanguages')
     &lt;/div&gt;
     &lt;div class="input-col"&gt;
-        &lbrace;!! Form::myCheckboxList('languages', $languages, ['class'=>'checkboxList', 'style'=>'column-count:3;']) !!&rbrace; 
+        &lbrace;!! Form::myCheckboxList('languages', $languages, ['class'=>'checkboxList', 'style'=>'column-count:3;']) !!&rbrace;
     &lt;/div&gt;
 &lt;/div>
 </pre>
@@ -324,27 +324,17 @@ function attributeTemplate($view, $attributes=[])
 
 /**
  * Used on a laravelcollective/html form to iterate through an array of fields
- * 
+ *
  * @param string $field
  * @param \Illuminate\Database\Eloquent\Model|null $model
  * @return array
  */
-function formIterator(?Eloquent\Model $model, string $field) : array
-{
-    if(Form::oldInputIsEmpty() === false){
-        return array_keys(old($field,[]));
-    }
-    
-    if($model === null){
-        return [];
-    }
-    
-    $array = method_exists($model, 'getFormValue') 
-            ? $model->getFormValue($field) 
-            : data_get($model, $field);
-    
-    return is_array($array) ? array_keys($array) : [];
-}
+ function formIterator(?Eloquent\Model $model, string $field): array
+ {
+     $array = old($field, data_get($model, $field, []));
+
+     return is_array($array) ? array_keys($array) : [];
+ }
 </pre>
             </li>
             <li>
@@ -366,7 +356,7 @@ function formIterator(?Eloquent\Model $model, string $field) : array
                     <li>
                         There are 2 different names used in creating this row. The name belonging to the attributes
                         is used to create the actual value for the name attribute in the HTML, e.g. name="additionalLanguages[]".
-                        The other $name (e.g. additionalLanguages[0]) is used for retrieving the value for the field and could 
+                        The other $name (e.g. additionalLanguages[0]) is used for retrieving the value for the field and could
                         be used to retrieve errors for that field.
                     </li>
                 </ul>
@@ -388,7 +378,7 @@ function formIterator(?Eloquent\Model $model, string $field) : array
         >
             &lt;tbody>
             &commat;foreach(formIterator(($personExperience ?? null), 'additionalLanguages') as $key)
-                &commat;include('programmer._list-row', ['name'=>'additionalLanguages['.$key.']', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')])                        
+                &commat;include('programmer._list-row', ['name'=>'additionalLanguages['.$key.']', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')])
             &commat;endforeach
             &lt;/tbody>
             &lt;tfoot>
@@ -406,23 +396,23 @@ function formIterator(?Eloquent\Model $model, string $field) : array
                 <uL>
                     <li>
                         The function attributeTemplate() was used to create a value for the data-template attribute.
-                        The data-template attribute will be used by JavaScript to add new rows to the "Additional Languages". 
-                        Laravel does not come with a built-in HTML attribute escaper, hence the need for the 
+                        The data-template attribute will be used by JavaScript to add new rows to the "Additional Languages".
+                        Laravel does not come with a built-in HTML attribute escaper, hence the need for the
                         attributeTemplate() function.
                     </li>
                     <li>
-                        Any existing "Additional Languages" are iterated through with help from the formIterator() function. 
+                        Any existing "Additional Languages" are iterated through with help from the formIterator() function.
                         If the form has been submitted then it iterates through the submitted values (from old() or session)
-                        otherwise if an Eloquent\Model is present then it iterates through values from it. The last option 
+                        otherwise if an Eloquent\Model is present then it iterates through values from it. The last option
                         is to iterate through an empty array.<br>
                         The argument "($personExperience ?? null)" is there because the Eloquent\Model $personExperience
-                        will exist when the form is being used to edit an existing person entry but not when a new 
+                        will exist when the form is being used to edit an existing person entry but not when a new
                         person entry is being first created.
                     </li>
                 </ul>
             </li>
             <li>
-                Create the JavaScript (<a href="{{ $gitHubRepo }}/blob/master/resources/js/programmer/edit.js">resources/js/programmer/edit.js</a>) 
+                Create the JavaScript (<a href="{{ $gitHubRepo }}/blob/master/resources/js/programmer/edit.js">resources/js/programmer/edit.js</a>)
                 for the edit.blade.php and link to it.
             </li>
         </ul>
@@ -433,14 +423,14 @@ function formIterator(?Eloquent\Model $model, string $field) : array
             <li>
                 Create the partial view blade template used to input each IT job (experience) the programmer has had
                 (i.e. <a href="{{ $gitHubRepo }}/blob/master/resources/views/programmer/_experience.blade.php">resources/views/programmer/_experience.blade.php</a>).
-                <br> 
+                <br>
                 Each job will become part of the experience[] array. Each job in the array will be given a unique integer key.
-                Example: experience[0] will be an array containing data on the first job 
+                Example: experience[0] will be an array containing data on the first job
                 (experience[0][companyName], experience[0][officeLocation], etc). It in turn contains a couple of arrays
-                (experience[0][languagesUsed][] and experience[0][additionalLanguagesUsed][]). 
+                (experience[0][languagesUsed][] and experience[0][additionalLanguagesUsed][]).
             </li>
             <li>
-                Add the "Work Experience" section to edit.blade.php. 
+                Add the "Work Experience" section to edit.blade.php.
 <pre>
 &lt;div class="row">
     &lt;h3>&commat;lang('messages.workExperience')&lt;/h3>
@@ -451,10 +441,10 @@ function formIterator(?Eloquent\Model $model, string $field) : array
 </pre>
                 <ul>
                     <li>
-                        The function formIterator() is used while iterating through 
+                        The function formIterator() is used while iterating through
                         the entered work experience and adding the _experience.blade.php for each job.<br>
-                        $personExperience is a \Illuminate\Database\Eloquent\Model and will not exist in the 
-                        add/create form but will be there for the edit form, hence the "($personExperience ?? null)". 
+                        $personExperience is a \Illuminate\Database\Eloquent\Model and will not exist in the
+                        add/create form but will be there for the edit form, hence the "($personExperience ?? null)".
                         $personExperience will be used to iterate through values from the database.
                     </li>
                     <li>
@@ -472,11 +462,11 @@ function formIterator(?Eloquent\Model $model, string $field) : array
         Make the _experience.blade.php template available to JavaScript so as to add new Job Experience blocks
         <ul>
             <li>
-                To the HTML container that is parent to the "Work Experience" section add a data attribute for the 
-                _experience.blade.php template and use the attributeTemplate() function to give it a value, 
+                To the HTML container that is parent to the "Work Experience" section add a data attribute for the
+                _experience.blade.php template and use the attributeTemplate() function to give it a value,
                 e.g. data-template="&commat;attributeTemplate('programmer._experience', ['k'=>'__index1__', 'countries'=>$countries, 'languages'=>$languages, 'workTypes'=>$workTypes])"
                 <br>
-                The 'k' variable (above) is assigned a placeholder that JavaScript will replace with an integer 
+                The 'k' variable (above) is assigned a placeholder that JavaScript will replace with an integer
                 key when adding a new job experience block to the form.
             </li>
             <li>
@@ -484,36 +474,26 @@ function formIterator(?Eloquent\Model $model, string $field) : array
 <pre>
 /**
  * Used on a laravelcollective/html form to provide JavaScript with next key to use when adding to array of fields
- * 
+ *
  * @param \Illuminate\Database\Eloquent\Model|null $model
  * @param string $parentField
  * @return int
  */
-function nextKey(?Eloquent\Model $model, string $parentField) : int
-{
-    if(Form::oldInputIsEmpty() && $model===null){
-        return 0;
-    }
-    
-    if(Form::oldInputIsEmpty()===false){
-        $parentValue = old($parentField);
-    }elseif(method_exists($model, 'getFormValue')){
-        $parentValue = $model->getFormValue($parentField);
-    }else{
-        $parentValue = data_get($model, $parentField);
-    }
+ function nextKey(?Eloquent\Model $model, string $parentField): int
+ {
+     $parentValue = old($parentField, data_get($model, $parentField, []));
 
-    if($parentValue === null || is_array($parentValue) === false){
-        return 0;
-    }
+     if ($parentValue === null || is_array($parentValue) === false) {
+         return 0;
+     }
 
-    /* all array keys that are positive integers */
-    $intKeys = array_map('intval', array_filter(array_keys($parentValue), function($key){
-        return filter_var($key, FILTER_VALIDATE_INT)!==false && abs($key)==$key;
-    }));
+     /* all array keys that are positive integers */
+     $intKeys = array_map('intval', array_filter(array_keys($parentValue), function ($key) {
+         return filter_var($key, FILTER_VALIDATE_INT) !== false && abs($key) == $key;
+     }));
 
-    return count($intKeys) ? (max($intKeys) + 1) : 0;
-}
+     return count($intKeys) ? (max($intKeys) + 1) : 0;
+ }
 </pre>
             </li>
             <li>
@@ -526,12 +506,12 @@ function nextKey(?Eloquent\Model $model, string $parentField) : int
                 To the HTML container that is parent to the "Work Experience" section add the data attribute:<br>
                 data-nextkey="&lbrace;!! nextKey(($personExperience ?? null), 'experience') !!&rbrace;"<br>
                 <br>
-                The purpose of this is to allow JavaScript to know which array key to use when adding a new 
-                job experience block. Each integer key must be unique so it needs to know the minimum integer 
+                The purpose of this is to allow JavaScript to know which array key to use when adding a new
+                job experience block. Each integer key must be unique so it needs to know the minimum integer
                 it can increment from.
             </li>
             <li>
-                Also add to the HTML container that is parent to the "Work Experience" section the following 
+                Also add to the HTML container that is parent to the "Work Experience" section the following
                 data attributes:<br>
                 data-translate-remove-tag="&lbrace;&lbrace; trans('messages.confirmRemoveTag') &rbrace;&rbrace;"<br>
                 data-translate-remove-job="&lbrace;&lbrace; trans('messages.confirmRemoveJob') &rbrace;&rbrace;"<br>
@@ -549,7 +529,7 @@ function nextKey(?Eloquent\Model $model, string $parentField) : int
                 Follow the instructions from reCAPTCHA to install Version 2 onto the form
             </li>
             <li>
-                To show an error message when reCAPTCHA fails to verify the user is human place the following 
+                To show an error message when reCAPTCHA fails to verify the user is human place the following
                 code at the top of the form
 <pre>
 &commat;error('g-recaptcha-response')
@@ -562,9 +542,9 @@ function nextKey(?Eloquent\Model $model, string $parentField) : int
         </ul>
     </li>
     <li>Building the form HTML is complete. We now move on to validating the form for the controller store() method.</li>
-    
-    
-    
+
+
+
     <li>
         Run command "php artisan make:model PersonExperience" to create the file
         /app/PersonExperience.php. Fill in the details of this Eloquent\Model. In my case
@@ -578,7 +558,7 @@ function nextKey(?Eloquent\Model $model, string $parentField) : int
         /app/Http/Requests/ProgrammingExperienceSave.php with a skeleton ProgrammingExperienceSave
         class in it. This class will contain the form validation logic.
         <br><br>
-        Add the contents from the 
+        Add the contents from the
         <a href="{{ $gitHubRepo }}/blob/master/app/Http/Requests/ProgrammingExperienceSave.php" target="_blank">GitHub Repository</a>
         to this file. The code here is quite self-explanatory if you are already familiar with writing
         <a href="https://laravel.com/docs/7.x/validation" target="_blank">Laravel Validation logic</a>.
@@ -611,17 +591,17 @@ private function savePrepared(array $data) : array
 public function store(ProgrammingExperienceSave $request)
 {
     $validatedData = $this->savePrepared($request->validated());
-    $save = array_merge($validatedData, ['sessionId'=>session()->getId()]);
+    $save = array_merge($validatedData, ['sessionToken'=>session('sessionToken')]);
     PersonExperience::create($save)->save();
 
     return redirect()->route('programmer.list');
 }
 </pre>
-        Because the request object is type-hinted (i.e. ProgrammingExperienceSave) as an 
-        argument for the store() action, Laravel validates the request before the 
-        controller method is called. If validation fails, a redirect response will 
-        be generated to send the user back to their previous location. The errors 
-        will also be flashed to the session so they are available for display. 
+        Because the request object is type-hinted (i.e. ProgrammingExperienceSave) as an
+        argument for the store() action, Laravel validates the request before the
+        controller method is called. If validation fails, a redirect response will
+        be generated to send the user back to their previous location. The errors
+        will also be flashed to the session so they are available for display.
     </li>
     <li>We now move on to being able to edit an existing record</li>
     <li>
@@ -630,14 +610,14 @@ public function store(ProgrammingExperienceSave $request)
 public function edit(FormOptions $formOptions)
 {
     // Customize to your purposes
-    $personExp = PersonExperience::where(['sessionId'=>session()->getId(), 'id'=>request('id')])->firstOrFail();
+    $personExp = PersonExperience::where(['sessionToken'=>session('sessionToken'), 'id'=>request('id')])->firstOrFail();
 
     return view('programmer/edit', [
         'personExperience' => $personExp,
         'countries' => $formOptions->getCountries('en_US'),
         'languages' => $formOptions->getProgrammingLanguages(),
         'workTypes' => $formOptions->getWorkTypeOptions(),
-    ]); 
+    ]);
 }
 </pre>
     </li>
@@ -646,7 +626,7 @@ public function edit(FormOptions $formOptions)
 <pre>
 public function update(ProgrammingExperienceSave $request)
 {
-    $personExp = PersonExperience::where(['sessionId'=>session()->getId(), 'id'=>request('id')])->firstOrFail(); // Customize to your needs
+    $personExp = PersonExperience::where(['sessionToken'=>session('sessionToken'), 'id'=>request('id')])->firstOrFail(); // Customize to your needs
     $validatedData = $this->savePrepared($request->validated());
     $personExp->update($validatedData);
 
@@ -655,14 +635,14 @@ public function update(ProgrammingExperienceSave $request)
 </pre>
     </li>
     <li>
-        In the view file "edit.blade.php" replace the code that creates the form opening tags with: 
+        In the view file "edit.blade.php" replace the code that creates the form opening tags with:
 <pre>
 &commat;if(!empty($personExperience))
 &lbrace;!! Form::model($personExperience, [
-                'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()], 
-                'method'=>'put', 
+                'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()],
+                'method'=>'put',
                 'id'=>"experience"
-    ]) 
+    ])
 !!&rbrace;
 &commat;else
 &lbrace;!! Form::open(['route'=>['programmer.store', 'locale'=>app()->getLocale()], 'method'=>'post', 'id'=>"experience"]) !!&rbrace;

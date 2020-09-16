@@ -40,14 +40,14 @@
     </div>
     @if(!empty($personExperience))
     {!! Form::model($personExperience, [
-                    'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()], 
-                    'method'=>'put', 
+                    'route'=>['programmer.update', 'id'=>$personExperience->id, 'locale'=>app()->getLocale()],
+                    'method'=>'put',
                     'id'=>"experience"
-        ]) 
+        ])
     !!}
     @else
     {!! Form::open(['route'=>['programmer.store', 'locale'=>app()->getLocale()], 'method'=>'post', 'id'=>"experience"]) !!}
-    @endif    
+    @endif
     @if ($errors->any())
         <p class="errors">@lang('messages.formErrors')</p>
     @endif
@@ -67,7 +67,7 @@
                 <label for="fullName">@lang('messages.fullName')</label>
             </div>
             <div class="input-col">
-                {!! Form::myInput('text', 'fullName', null, ['id'=>'fullName']) !!}  
+                {!! Form::myInput('text', 'fullName', null, ['id'=>'fullName']) !!}
             </div>
         </div>
         <div class="row">
@@ -91,7 +91,7 @@
                 <label for="countryId">@lang('messages.country')</label>
             </div>
             <div class="input-col">
-                {{ Form::mySelect('countryId', $countries, null, ['id'=>'countryId', 'placeholder'=>trans('messages.Select country')]) }}               
+                {{ Form::mySelect('countryId', $countries, null, ['id'=>'countryId', 'placeholder'=>trans('messages.Select country')]) }}
             </div>
         </div>
         <div class="row">
@@ -116,7 +116,7 @@
                 >
                     <tbody>
                     @foreach(formIterator(($personExperience ?? null), 'additionalLanguages') as $key)
-                        @include('programmer._list-row', ['name'=>'additionalLanguages['.$key.']', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')])                        
+                        @include('programmer._list-row', ['name'=>'additionalLanguages['.$key.']', 'nameAttribute'=>'additionalLanguages[]', 'placeholder'=>trans('messages.Programming Language')])
                     @endforeach
                     </tbody>
                     <tfoot>

@@ -23,10 +23,19 @@ Route::group([
     'name' => 'programmer.',
     'where' => ['locale' => '^(en_US|de_DE)$'],
     'middleware' => 'setlocale'
-    ], function() {
-    
-        Route::get('/create', 'ProgrammerExperienceController@add')->name('programmer.create');
-        Route::get('/{id}/edit', 'ProgrammerExperienceController@edit')->where(['id'=>'[0-9]+'])->name('programmer.edit');
-        Route::post('/', 'ProgrammerExperienceController@store')->name('programmer.store');
-        Route::put('/{id}', 'ProgrammerExperienceController@update')->where(['id'=>'[0-9]+'])->name('programmer.update');
+], function () {
+
+    Route::get('/create', 'ProgrammerExperienceController@add')
+        ->name('programmer.create');
+
+    Route::get('/{id}/edit', 'ProgrammerExperienceController@edit')
+        ->where(['id' => '[0-9]+'])
+        ->name('programmer.edit');
+        
+    Route::post('/', 'ProgrammerExperienceController@store')
+        ->name('programmer.store');
+
+    Route::put('/{id}', 'ProgrammerExperienceController@update')
+        ->where(['id' => '[0-9]+'])
+        ->name('programmer.update');
 });

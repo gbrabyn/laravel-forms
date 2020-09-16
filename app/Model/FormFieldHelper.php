@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 use Illuminate\Support\ViewErrorBag;
@@ -8,20 +9,20 @@ use Illuminate\Support\ViewErrorBag;
  *
  * @author G Brabyn
  */
-class FormFieldHelper 
+class FormFieldHelper
 {
     /** @var string */
     private $fieldName;
-    
+
     /** @var ViewErrorBag */
     private $errors;
-    
+
     /** @var array */
     private $attributes;
-    
+
     /** @var string */
     private $errorName;
-    
+
     public function __construct(string $fieldName, ViewErrorBag $errors, array $attributes)
     {
         $this->fieldName = $fieldName;
@@ -29,58 +30,57 @@ class FormFieldHelper
         $this->attributes = $attributes;
         $this->errorName = $this->makeErrorName($fieldName);
     }
-    
-    /** Field name used to retrieve errors uses dot syntax to denote arrays, 
-     * i.e. person.name for person[name]  
+
+    /** Field name used to retrieve errors uses dot syntax to denote arrays,
+     * i.e. person.name for person[name]
      */
-    private function makeErrorName(string $fieldName) : string
+    private function makeErrorName(string $fieldName): string
     {
-        return \str_replace(['[', '"', '\'', ']'], ['.'], $fieldName);
+        return \str_replace(['.', '[]', '[', ']'], ['_', '', '.', ''], $fieldName);
     }
-    
-    public function getErrorName() : string
+
+    public function getErrorName(): string
     {
         return $this->errorName;
     }
-    
-    public function getAttributes() : array
+
+    public function getAttributes(): array
     {
         $attributes = $this->attributes;
-        
-        if($this->errors->has($this->errorName)){
-            if(\array_key_exists('class', $attributes)){
+
+        if ($this->errors->has($this->errorName)) {
+            if (\array_key_exists('class', $attributes)) {
                 $attributes['class'] .= ' error';
-            }else{
+            } else {
                 $attributes['class'] = 'error';
             }
         }
-        
+
         return $attributes;
     }
-    
-    public function getAttributesString() : string
+
+    public function getAttributesString(): string
     {
         $attr = [];
-        foreach($this->getAttributes() as $k => $v){
-            if(! is_int($k)){
-                $attr[] = e($k).'="'.e($v).'"';
-            }else{
+        foreach ($this->getAttributes() as $k => $v) {
+            if (is_int($k)) {
                 $attr[] = e($v);
+            } else {
+                $attr[] = e($k) . '="' . e($v) . '"';
             }
         }
-        
+
         return \implode(' ', $attr);
     }
-    
+
     /**
      * Removes '[]' from end of $fieldName if exists
-     * 
+     *
      * @param string $fieldName
      * @return string
      */
-    public static function removeArrayEndingFromFieldName(string $fieldName) : string
+    public static function removeArrayEndingFromFieldName(string $fieldName): string
     {
-        return \preg_replace('/'. \preg_quote('[]', '/') . '$/', '', $fieldName);
+        return \preg_replace('/' . \preg_quote('[]', '/') . '$/', '', $fieldName);
     }
-    
 }

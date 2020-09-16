@@ -1,5 +1,10 @@
 <?php
+
 namespace App\Model;
+
+use GuzzleHttp\ClientInterface;
+use App\Entity\IpAddress;
+use Psr\Log\LoggerInterface;
 
 /**
  * Validates Googles reCAPTCHA v3 - to verify user is human
@@ -8,36 +13,34 @@ namespace App\Model;
  */
 class ReCaptchaV3
 {
-    /**
-     * @var mixed
-     */
+    const API_URL = 'https://www.google.com/recaptcha/api/siteverify';
+
+    /** @var mixed */
     protected $value;
-    
-    /**
-     * @var string
-     */
+
+    /** @var string */
     private $secret;
 
-    private $options = [
-        'sendUsersIpAddress' => false,
-    ];
+    /** @var ClientInterface */
+    private $httpClient;
 
-    private $apiUrl = 'https://www.google.com/recaptcha/api/siteverify';
+    /** @var LoggerInterface */
+    private $logger;
 
-    
-    public function __construct(string $secret, array $options=[])
-    {
+    /** @var IpAddress */
+    private $usersIp;
+
+
+    public function __construct(
+        ClientInterface $httpClient,
+        string $secret,
+        LoggerInterface $logger,
+        ?IpAddress $usersIp = null
+    ) {
+        $this->httpClient = $httpClient;
         $this->secret = $secret;
-        $this->setOptions($options);
-    }
-
-    private function setOptions(array $options)
-    {
-        foreach($options as $k => $v){
-            if(\array_key_exists($k, $this->options)){
-                $this->options[$k] = (bool)$v;
-            }
-        }
+        $this->logger = $logger;
+        $this->usersIp = $usersIp;
     }
 
     public function setValue($value)
@@ -45,61 +48,32 @@ class ReCaptchaV3
         $this->value = $value;
     }
 
-    public function isValid() : bool
+    public function isValid(): bool
     {
         $response = $this->getApiResponse($this->value);
 
-        if(!empty($response->{'error-codes'})){
-            \error_log('reCaptcha API error: '.print_r($response->{'error-codes'}, true));
+        if (!empty($response->{'error-codes'})) {
+            $this->logger->alert('reCaptcha API error: ' . print_r($response->{'error-codes'}, true));
         }
-        
+
         return ($response->success == true);
     }
-    
+
     /**
-     * 
+     *
      * @param string $responseFromForm
      * @return stdObject
      */
     private function getApiResponse(string $responseFromForm)
     {
-        $data = ['secret'=>$this->secret, 'response'=>$responseFromForm];
+        $data = ['secret' => $this->secret, 'response' => $responseFromForm];
 
-        if($this->options['sendUsersIpAddress'] === true){
-            $data['remoteip'] = $this->getUserIpAddr();
+        if ($this->usersIp !== null) {
+            $data['remoteip'] = $this->usersIp->get();
         }
 
-        $query = \http_build_query($data);
+        $response = $this->httpClient->request('post', self::API_URL, ['form_params' => $data]);
 
-        $header = array(
-            "Content-Type: application/x-www-form-urlencoded",
-            "Content-Length: ".\strlen($query)
-        );
-
-        $options = [
-                'http' => [
-                    'method' => 'POST',
-                    'header' => \implode("\r\n", $header),
-                    'content' => $query,
-                ]
-        ];
-
-        $context  = \stream_context_create($options);
-        $verify = \file_get_contents($this->apiUrl, false, $context);
-
-        return \json_decode($verify);
-    }
-
-    private function getUserIpAddr()
-    {
-        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
-            //ip from share internet
-            return $_SERVER['HTTP_CLIENT_IP'];
-        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-            //ip pass from proxy
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-
-        return $_SERVER['REMOTE_ADDR'];
+        return \json_decode($response->getBody());
     }
 }

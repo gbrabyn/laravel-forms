@@ -3,9 +3,12 @@
 namespace App\Repository;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PersonExperience extends Model
 {
+    use HasFactory;
+    
     protected $table = 'PersonExperience';
 
     public $timestamps = false;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "064dd6b5faf614a703ae18192b3a7905",
+    "content-hash": "ed2069f47d5b032a71a290cdead6d8ec",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -843,54 +843,6 @@
                 }
             ],
             "time": "2020-04-28T08:47:37+00:00"
-        },
-        {
-            "name": "gbrabyn/laravel-form-helpers",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gbrabyn/laravel-fh.git",
-                "reference": "a02d73cff2b01ae81302e94aea9cd7697ed70b76"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gbrabyn/laravel-fh/zipball/a02d73cff2b01ae81302e94aea9cd7697ed70b76",
-                "reference": "a02d73cff2b01ae81302e94aea9cd7697ed70b76",
-                "shasum": ""
-            },
-            "require": {
-                "laminas/laminas-escaper": "^2.0",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "laravel/framework": "7.* || 8.*",
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "GBrabyn\\LaravelFormHelpers\\": "src/"
-                }
-            },
-            "license": [
-                "DBAD"
-            ],
-            "authors": [
-                {
-                    "name": "GBrabyn",
-                    "email": "gbrabyn@gmail.com"
-                }
-            ],
-            "description": "Helpers for building dynamic forms with laravel",
-            "keywords": [
-                "form",
-                "laravel"
-            ],
-            "support": {
-                "source": "https://github.com/gbrabyn/laravel-fh/tree/master",
-                "issues": "https://github.com/gbrabyn/laravel-fh/issues"
-            },
-            "time": "2020-09-19T04:23:50+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -7565,9 +7517,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "gbrabyn/laravel-form-helpers": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

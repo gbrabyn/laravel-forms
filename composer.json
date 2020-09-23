@@ -7,12 +7,7 @@
         "laravel"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/gbrabyn/laravel-fh.git"
-        }
-    ],
+    "repositories": [],
     "require": {
         "php": "^7.2.5",
         "doctrine/dbal": "^2.10",

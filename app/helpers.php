@@ -31,10 +31,6 @@ function attributeTemplate($view, $attributes = [])
 
 /**
  * Used on a laravelcollective/html form to iterate through an array of fields
- *
- * @param string $field
- * @param \Illuminate\Database\Eloquent\Model|null $model
- * @return array
  */
 function formIterator(?Eloquent\Model $model, string $field): array
 {
@@ -45,10 +41,6 @@ function formIterator(?Eloquent\Model $model, string $field): array
 
 /**
  * Used on a laravelcollective/html form to provide JavaScript with next key to use when adding to array of fields
- *
- * @param \Illuminate\Database\Eloquent\Model|null $model
- * @param string $parentField
- * @return int
  */
 function nextKey(?Eloquent\Model $model, string $parentField): int
 {

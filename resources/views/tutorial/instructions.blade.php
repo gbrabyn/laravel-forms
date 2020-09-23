@@ -20,7 +20,7 @@
     The source code for this website can be found at <a href="{{ $gitHubRepo }}">GitHub</a>.
 </p>
 <p>
-    Below are instruction on how to set up in Laravel 7 <a href="/en_US/programmer/create">this dynamic form here</a>.
+    Below are instruction on how to set up in Laravel 8 <a href="/en_US/programmer/create">this dynamic form here</a>.
     The form contains several dynamic sections (fields added by JavaScript). It also has dynamic elements within
     other dynamic blocks. This makes building and validating the form more complex. Some quite complex validation
     rules are applied.
@@ -32,7 +32,7 @@
 </p>
 <ul>
     <li>
-        Have a working instance of Laravel 7
+        Have a working instance of Laravel 8
     </li>
     <li>
         Install Laravel Collective and create some form components
@@ -56,7 +56,42 @@
                 <br>
                 These files should be customized for your projects particular needs.
             </li>
-            <li>app/Providers - add <a href="{{ $gitHubRepo }}/blob/master/app/Providers/FormServiceProvider.php">FormServiceProvider.php</a></li>
+            <li>app/Providers - add FormServiceProvider.php as follows:
+<pre>
+&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Form;
+
+class FormServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+    }
+
+    /**
+     * Bootstrap services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Form::component('myInput', 'components.form.myInput', ['type', 'name', 'value' => null, 'attributes' => []]);
+        Form::component('myTextarea', 'components.form.myTextarea', ['name', 'value' => null, 'attributes' => []]);
+        Form::component('mySelect', 'components.form.mySelect', ['name', 'options', 'value' => null, 'attributes' => []]);
+        Form::component('myCheckboxList', 'components.form.myCheckboxList', ['name', 'options', 'attributes' => []]);
+        Form::component('myRadioList', 'components.form.myRadioList', ['name', 'options', 'attributes' => []]);
+    }
+}
+</pre>
+            </li>
             <li>config/app.php - add App\Providers\FormServiceProvider::class to 'providers' array</li>
         </ul>
     </li>
@@ -256,7 +291,7 @@ Blade::directive('languageSwitch', function () {
 public function add(\App\Model\ProgrammingExperienceFormOptions $formOptions)
 {
     return view('programmer/edit', [
-        'countries' => $formOptions->getCountries('en_US'),
+        'countries' => $formOptions->getCountries(request('locale', 'en_US')),
         'languages' => $formOptions->getProgrammingLanguages(),
         'workTypes' => $formOptions->getWorkTypeOptions(),
     ]);
@@ -324,10 +359,6 @@ function attributeTemplate($view, $attributes=[])
 
 /**
  * Used on a laravelcollective/html form to iterate through an array of fields
- *
- * @param string $field
- * @param \Illuminate\Database\Eloquent\Model|null $model
- * @return array
  */
  function formIterator(?Eloquent\Model $model, string $field): array
  {
@@ -474,10 +505,6 @@ function attributeTemplate($view, $attributes=[])
 <pre>
 /**
  * Used on a laravelcollective/html form to provide JavaScript with next key to use when adding to array of fields
- *
- * @param \Illuminate\Database\Eloquent\Model|null $model
- * @param string $parentField
- * @return int
  */
  function nextKey(?Eloquent\Model $model, string $parentField): int
  {
@@ -529,6 +556,9 @@ function attributeTemplate($view, $attributes=[])
                 Follow the instructions from reCAPTCHA to install Version 2 onto the form
             </li>
             <li>
+                In the .env file add the reCAPTCHA key (as RECAPTCHA_KEY) and secret (as RECAPTCHA_SECRET).
+            </li>
+            <li>
                 To show an error message when reCAPTCHA fails to verify the user is human place the following
                 code at the top of the form
 <pre>
@@ -551,7 +581,33 @@ function attributeTemplate($view, $attributes=[])
         I have moved it into the Repository directory.
     </li>
     <li>
-        Create the class <a href="{{ $gitHubRepo }}/blob/master/app/Model/ReCaptchaV3.php">App\Model\ReCaptchaV3</a>.
+        Create the validator for reCAPTCHA:
+        <ul>
+            <li>
+                In composer.json require - "guzzlehttp/guzzle": "^7.0.1"
+                <br>
+                Command: composer update
+            </li>
+            <li>
+                Create the class <a href="{{ $gitHubRepo }}/blob/master/app/Entity/IpAddress.php">App\Entity\IpAddress</a>.
+            </li>
+            <li>
+                Create the class <a href="{{ $gitHubRepo }}/blob/master/app/Model/ReCaptchaV3.php">App\Model\ReCaptchaV3</a>.
+            </li>
+            <li>
+                In App\Providers\FormServiceProvider above the class declaration add:<br>
+                use App\Model\ReCaptchaV3;<br>
+                use GuzzleHttp\Client;<br>
+                <br>
+                In the register() method add:
+<pre>
+    $this->app->bind(ReCaptchaV3::class, function ($app) {
+        return new ReCaptchaV3(new Client(), env('RECAPTCHA_SECRET'), \Log::getLogger(), null);
+    });
+</pre>
+                The reCAPTCHA secret (RECAPTCHA_SECRET) is to be held in the .env file.
+            </li>
+        </ul>
     </li>
     <li>
         Run command "php artisan make:request ProgrammingExperienceSave" to create the file
@@ -561,7 +617,7 @@ function attributeTemplate($view, $attributes=[])
         Add the contents from the
         <a href="{{ $gitHubRepo }}/blob/master/app/Http/Requests/ProgrammingExperienceSave.php" target="_blank">GitHub Repository</a>
         to this file. The code here is quite self-explanatory if you are already familiar with writing
-        <a href="https://laravel.com/docs/7.x/validation" target="_blank">Laravel Validation logic</a>.
+        <a href="https://laravel.com/docs/8.x/validation" target="_blank">Laravel Validation logic</a>.
     </li>
     <li>
         Above the Controller (i.e. ProgrammerExperienceController) add the lines:
@@ -614,7 +670,7 @@ public function edit(FormOptions $formOptions)
 
     return view('programmer/edit', [
         'personExperience' => $personExp,
-        'countries' => $formOptions->getCountries('en_US'),
+        'countries' => $formOptions->getCountries(request('locale', 'en_US')),
         'languages' => $formOptions->getProgrammingLanguages(),
         'workTypes' => $formOptions->getWorkTypeOptions(),
     ]);

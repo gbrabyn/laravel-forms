@@ -17,7 +17,6 @@ class FormServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(ReCaptchaV3::class, function ($app) {
-
             return new ReCaptchaV3(new Client(), env('RECAPTCHA_SECRET'), \Log::getLogger(), null);
         });
     }

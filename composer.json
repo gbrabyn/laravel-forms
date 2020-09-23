@@ -22,8 +22,7 @@
         "laminas/laminas-escaper": "~2.5",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
-        "laravelcollective/html": "^6.1",
-        "gbrabyn/laravel-form-helpers": "dev-master"
+        "laravelcollective/html": "^6.1"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

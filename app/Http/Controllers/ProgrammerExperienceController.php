@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Model\ProgrammingExperienceFormOptions as FormOptions;
 use App\Repository\PersonExperience;
 use App\Http\Requests\ProgrammingExperienceSave;
-use GBrabyn\LaravelFormHelpers\AttributeTemplate;
 
 /**
  *
@@ -23,13 +22,12 @@ class ProgrammerExperienceController extends Controller
         ]);
     }
 
-    public function add(FormOptions $formOptions, AttributeTemplate $attrTemp)
+    public function add(FormOptions $formOptions)
     {
         return view('programmer/edit', [
             'countries' => $formOptions->getCountries(request('locale', 'en_US')),
             'languages' => $formOptions->getProgrammingLanguages(),
             'workTypes' => $formOptions->getWorkTypeOptions(),
-            'attributeTemplate' => $attrTemp,
         ]);
     }
 
